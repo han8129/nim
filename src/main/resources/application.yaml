@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: nim
+  datasource:
+    url: jdbc:sqlite:nim_game.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
