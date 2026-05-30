@@ -11,7 +11,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
+		languageVersion = JavaLanguageVersion.of(24)
 	}
 }
 
@@ -22,8 +22,10 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("tools.jackson.module:jackson-module-kotlin")
+	implementation("org.hibernate.orm:hibernate-community-dialects")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.xerial:sqlite-jdbc")
 	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
@@ -33,6 +35,7 @@ dependencies {
 }
 
 kotlin {
+	jvmToolchain(24)
 	compilerOptions {
 		freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
 	}

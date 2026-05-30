@@ -17,9 +17,8 @@ class GameService {
         }
     }
 
-    fun playTurn(amount: Int, player: Player): Game {
-        gameInstance.makeMove(amount, player)
-        return gameInstance
+    fun playTurn(amount: Int, player: Player): Result<GameState> {
+        return gameInstance.makeMove(amount, player)
     }
 
     fun getState(): GameState {
