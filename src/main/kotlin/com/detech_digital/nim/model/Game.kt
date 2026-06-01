@@ -58,7 +58,7 @@ class Game(
             else
                 -> when (moves.last().player) {
                 Player.HUMAN -> Player.COMPUTER
-                Player.COMPUTER -> Player.COMPUTER
+                Player.COMPUTER -> Player.HUMAN
             }
         }
 
