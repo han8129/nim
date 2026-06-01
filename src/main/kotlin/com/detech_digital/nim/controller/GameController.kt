@@ -17,12 +17,8 @@ class GameController(private val gameService: GameService) {
     fun makeMove(
         @Valid @RequestBody payload: MoveRequestDto,
     ): ResponseEntity<Any> {
-        return try {
-            val gameState = gameService.playTurn(payload.take, player = Player.HUMAN)
-            ResponseEntity.ok(gameState)
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.badRequest().body(mapOf("error" to e.message))
-        }
+        val gameState = gameService.playTurn(payload.take, player = Player.HUMAN)
+        return ResponseEntity.ok(gameState)
     }
 
     @GetMapping("")

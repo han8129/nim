@@ -2,13 +2,22 @@ package com.detech_digital.nim.model
 
 import com.detech_digital.nim.dto.GameState
 
+/**
+ * Represents single Nim game session with fixed heap of matches.
+ *
+ * Two players, [Player.HUMAN] and [Player.COMPUTER], alternate taking 1 to 3 matches from heap.
+ * Player who takes last match loses.
+ *
+ * @param heap Initial match count in heap
+ * @param moves Ordered log of all moves made during session.
+ */
 class Game(
-    internal var heap: Int,
+    private var heap: Int,
     private val moves: MutableList<Move> = mutableListOf(),
 ) {
     /**
      * Executes a move: validates it, updates the heap,
-     * logs the move, and checks the win condition.
+     * logs the move
      */
     fun makeMove(amountToTake: Int, player: Player): Result<GameState> {
         if (heap < 1) {
@@ -31,6 +40,17 @@ class Game(
         return Result.success(getState());
     }
 
+
+    /**
+     * Returns current game state snapshot.
+     *
+     * Captures heap size, move history, game-over status, and whose turn it is.
+     * Turn determined by last move player.
+     * If no moves made yet or COMPUTER moved last, next turn is COMPUTER.
+     * Game over when heap reaches 0 (last match taken).
+     *
+     * @return referred GameState containing current heap, moves list, over flag, and next player
+     */
     fun getState(): GameState {
         val isGameOver = (heap < 1)
         val turn = when {
