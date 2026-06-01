@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/games")
 class GameController(private val gameService: GameService) {
 
-    @PutMapping("/move")
+    @PostMapping("/move")
     fun makeMove(
         @Valid @RequestBody payload: MoveRequestDto,
     ): ResponseEntity<Any> {
-        val gameState = gameService.playTurn(payload.take, player = Player.HUMAN)
+        val gameState = gameService.playTurn(payload.take)
         return ResponseEntity.ok(gameState)
     }
 
