@@ -2,13 +2,6 @@ package com.detech_digital.nim.model
 
 import com.detech_digital.nim.dto.GameState
 
-data class Move(
-    val take: Int,
-    val heapBefore: Int,
-    val player: Player
-)
-
-
 class Game(
     internal var heap: Int,
     private val moves: MutableList<Move> = mutableListOf(),
