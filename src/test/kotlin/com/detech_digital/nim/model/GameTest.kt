@@ -171,7 +171,7 @@ class GameTest {
             game.makeMove(1, Player.COMPUTER)
             val state = game.getState()
 
-            assertEquals(Player.COMPUTER, state.turn)
+            assertEquals(Player.HUMAN, state.turn)
         }
 
         @Test
