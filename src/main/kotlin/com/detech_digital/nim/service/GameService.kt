@@ -17,6 +17,10 @@ class GameService(
         )
     }
 
+    /**
+     *  return the game state affected by the human player move. computer is a side effect, recorded but not included in
+     *  the response
+     */
     fun playTurn(amount: Int): Result<GameState> {
         val humanGameState = gameInstance.makeMove(amount, Player.HUMAN)
         if (humanGameState.isFailure) {
