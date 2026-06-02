@@ -18,8 +18,7 @@ class ComputerController(private val gameService: GameService) {
     fun updateStrategy(@Valid @RequestBody request: StrategyRequestDto): ResponseEntity<Any> {
         val computerStrategy = when (request.strategy) {
             "optimal" -> OptimalStrategy()
-            "random" -> RandomStrategy()
-            else -> return ResponseEntity.badRequest().body(mapOf("error" to "Invalid strategy"))
+            else -> RandomStrategy()
         }
         gameService.setComputerStrategy(computerStrategy)
         return ResponseEntity.ok(mapOf("message" to "Strategy updated to ${request.strategy}"))

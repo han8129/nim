@@ -20,11 +20,16 @@ class GameController(private val gameService: GameService) {
     fun makeMove(
         @Valid @RequestBody payload: MoveRequestDto,
     ): ResponseEntity<Any> {
-        val gameState = gameService.playTurn(payload.take)
-        if (gameState.isFailure) {
+        val gameState = gameService.getState();
+        if (gameState.isGameOver) {
             throw ResponseStatusException(HttpStatus.FORBIDDEN, "Game is over")
         }
-        return ResponseEntity.ok(gameState)
+
+        val humanMove = gameService.playTurn(
+            amount = payload.take,
+        )
+        println("Game State: ${gameService.getState()}")
+        return ResponseEntity.ok(humanMove)
     }
 
     @GetMapping("")

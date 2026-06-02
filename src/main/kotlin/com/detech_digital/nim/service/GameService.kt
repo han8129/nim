@@ -18,15 +18,16 @@ class GameService(
     }
 
     fun playTurn(amount: Int): Result<GameState> {
-        val gameState = gameInstance.makeMove(amount, Player.HUMAN)
-        if (gameState.isFailure) {
-            return gameState
+        val humanGameState = gameInstance.makeMove(amount, Player.HUMAN)
+        if (humanGameState.isFailure) {
+            return humanGameState
         }
 
         // computer turn
-        val newHeap = gameState.map { it.heap }.getOrDefault(0)
+        val newHeap = humanGameState.map { it.heap }.getOrDefault(0)
         val computerTake = computerStrategy.getMoveAmount(heap = newHeap)
-        return gameInstance.makeMove(computerTake, Player.COMPUTER)
+        gameInstance.makeMove(computerTake, Player.COMPUTER)
+        return humanGameState
     }
 
     fun getState(): GameState {
