@@ -37,7 +37,7 @@ class GameService(
     fun newGame(heap: Int): GameState {
         gameInstance = Game(
             heap
-        );
+        )
 
         return getState()
     }

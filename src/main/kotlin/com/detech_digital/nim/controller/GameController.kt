@@ -3,10 +3,8 @@ package com.detech_digital.nim.controller
 import com.detech_digital.nim.dto.GameState
 import com.detech_digital.nim.dto.MoveRequestDto
 import com.detech_digital.nim.dto.NewGameRequestDto
-import com.detech_digital.nim.model.Player
 import com.detech_digital.nim.service.GameService
 import jakarta.validation.Valid
-import org.apache.coyote.BadRequestException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,7 +18,7 @@ class GameController(private val gameService: GameService) {
     fun makeMove(
         @Valid @RequestBody payload: MoveRequestDto,
     ): ResponseEntity<Any> {
-        val gameState = gameService.getState();
+        val gameState = gameService.getState()
         if (gameState.isGameOver) {
             throw ResponseStatusException(HttpStatus.FORBIDDEN, "Game is over")
         }
