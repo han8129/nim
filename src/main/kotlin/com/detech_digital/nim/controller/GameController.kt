@@ -6,8 +6,11 @@ import com.detech_digital.nim.dto.NewGameRequestDto
 import com.detech_digital.nim.model.Player
 import com.detech_digital.nim.service.GameService
 import jakarta.validation.Valid
+import org.apache.coyote.BadRequestException
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @RequestMapping("/api/games")
@@ -18,6 +21,9 @@ class GameController(private val gameService: GameService) {
         @Valid @RequestBody payload: MoveRequestDto,
     ): ResponseEntity<Any> {
         val gameState = gameService.playTurn(payload.take)
+        if (gameState.isFailure) {
+            throw ResponseStatusException(HttpStatus.FORBIDDEN, "Game is over")
+        }
         return ResponseEntity.ok(gameState)
     }
 
