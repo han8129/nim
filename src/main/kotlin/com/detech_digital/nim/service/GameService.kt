@@ -13,7 +13,7 @@ class GameService(
 ) {
     companion object {
         var gameInstance: Game = Game(
-            heap = 12,
+            heap = 0,
         )
     }
 
@@ -47,7 +47,6 @@ class GameService(
      * @param newStrategy New ComputerPlayerService implementation
      */
     fun setComputerStrategy(newStrategy: ComputerPlayerService) {
-        // Implementation would require refactoring to support this
-        // Currently using constructor injection with @Qualifier
+        computerStrategy = newStrategy
     }
 }
