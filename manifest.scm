@@ -1,4 +1,4 @@
 (specifications->manifest
- '("openjdk@25:jdk"
+ '("openjdk@24:jdk"
    "gradle"
    "bash"))

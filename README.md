@@ -11,6 +11,16 @@ Rules
 
 ## Build & Run
 
+### Env
+Using guix
+```shell
+guix shell --pure -m manifest.scm
+```
+
+Using Docker
+```shell
+docker compose up -d app
+```
 ### Build
 
 ```sh
